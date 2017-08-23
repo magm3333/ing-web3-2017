@@ -6,6 +6,11 @@ import java.io.StringWriter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 
+ * @author magm
+ *
+ */
 public class SimpleResponse implements Serializable {
 	private static final long serialVersionUID = 6229322065137629670L;
 

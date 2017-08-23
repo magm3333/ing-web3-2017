@@ -9,20 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.magm.ti.model.service.IPlantaService;
+import ar.com.magm.ti.model.service.IEntidadService;
 import ar.com.magm.ti.service.SimpleResponse;
 import ar.com.magm.ti.service.exception.ServiceException;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 @RestController
-@RequestMapping(value = Constants.URL_PLANTAS)
-public class PlantasRSController {
-	private static Logger LOG = LoggerFactory.getLogger(PlantasRSController.class);
+@RequestMapping(value = Constants.URL_ENTIDAD)
+public class EntidadRSController {
+	private static Logger LOG = LoggerFactory.getLogger(EntidadRSController.class);
 	@Autowired
-	IPlantaService plantaService;
+	IEntidadService entidadService;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<Object> list() {
 		try {
-			return new ResponseEntity<Object>(plantaService.list(), HttpStatus.OK);
+			return new ResponseEntity<Object>(entidadService.list(), HttpStatus.OK);
 		} catch (ServiceException e) {
 			LOG.error(e.getMessage(), e);
 			return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

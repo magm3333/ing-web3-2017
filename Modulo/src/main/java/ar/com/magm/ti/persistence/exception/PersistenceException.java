@@ -1,5 +1,10 @@
 package ar.com.magm.ti.persistence.exception;
 
+/**
+ * 
+ * @author magm
+ *
+ */
 public class PersistenceException extends Exception {
 
 

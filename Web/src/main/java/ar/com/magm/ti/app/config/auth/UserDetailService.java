@@ -8,7 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 @Component
 public class UserDetailService implements UserDetailsService {
 	private static Logger LOG = LoggerFactory.getLogger(UserDetailService.class);

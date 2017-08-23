@@ -15,39 +15,40 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "plantas")
-public class Planta implements Serializable {
+public class Entidad implements Serializable {
 
 	private static final long serialVersionUID = 2464927409480955012L;
 	@Id
 	@GeneratedValue
-	private int idPlanta;
+	private int idEntidad;
 
-	public int getIdPlanta() {
-		return idPlanta;
-	}
 
-	public void setIdPlanta(int idPlanta) {
-		this.idPlanta = idPlanta;
-	}
-
-	public String getPlanta() {
-		return planta;
-	}
-
-	public void setPlanta(String planta) {
-		this.planta = planta;
-	}
-
-	private String planta;
+	private String nombre;
 
 	@Override
 	public int hashCode() {
-		return getIdPlanta();
+		return getIdEntidad();
 
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Planta: %s - %s", getIdPlanta(), getPlanta());
+		return String.format("Entidad: %s - %s", getIdEntidad(), getNombre());
+	}
+
+	public int getIdEntidad() {
+		return idEntidad;
+	}
+
+	public void setIdEntidad(int idEntidad) {
+		this.idEntidad = idEntidad;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 }

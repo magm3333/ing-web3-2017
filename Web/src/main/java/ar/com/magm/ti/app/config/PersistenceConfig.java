@@ -19,10 +19,13 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 @EnableTransactionManagement
-
-@PropertySource({ "classpath:/config/persistence.properties","classpath:/config/persistence-${spring.profiles.active:mysqllocal}.properties" })
+@PropertySource({ "classpath:/config/persistence.properties","classpath:/config/persistence-${spring.profiles.active:local}.properties" })
 public class PersistenceConfig {
 	private static Logger LOG = LoggerFactory.getLogger(PersistenceConfig.class);
 	@Autowired

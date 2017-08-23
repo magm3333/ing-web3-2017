@@ -2,7 +2,11 @@ package ar.com.magm.ti.app.config;
 
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 /*
 	@Bean

@@ -12,6 +12,13 @@ import ar.com.magm.ti.service.IGenericService;
 import ar.com.magm.ti.service.exception.ServiceException;
 import javassist.NotFoundException;
 
+/**
+ * 
+ * @author magm
+ *
+ * @param <Entity>
+ * @param <PK>
+ */
 public class GenericService<Entity, PK extends Serializable> implements IGenericService<Entity, PK> {
 	private static Logger LOG = LoggerFactory.getLogger(GenericService.class);
 	private IGenericDAO<Entity, PK> dao;

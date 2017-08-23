@@ -1,5 +1,9 @@
 package ar.com.magm.ti.web.services;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 public final class Constants {
 	public static final String URL_API = "/api";
 	public static final String URL_API_VERSION = "/v1";
@@ -14,6 +18,6 @@ public final class Constants {
 	
 	public static final String URL_DENY = "/deny";
 	
-	public static final String URL_PLANTAS = URL_BASE + "/plantas";
+	public static final String URL_ENTIDAD= URL_BASE + "/entidades";
 	
 }

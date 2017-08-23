@@ -24,38 +24,42 @@ import org.springframework.web.filter.CorsFilter;
 import ar.com.magm.ti.app.config.auth.UserDetailService;
 import ar.com.magm.ti.web.services.Constants;
 
+/**
+ * 
+ * @author magm
+ *
+ */
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, proxyTargetClass = true)
-@PropertySource({ "classpath:/config/security.properties" })
+@PropertySource({ "classpath:/config/security.properties",
+		"classpath:/config/security-${spring.profiles.active:local}.properties" })
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	
+
 	@Autowired
 	private Environment env;
-	
-	
+
 	@Bean
 	public Filter corsFilter() {
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    CorsConfiguration config = new CorsConfiguration();
-	    config.setAllowCredentials(true);
-	    config.addAllowedOrigin("*");
-	    config.addAllowedHeader("*");
-	    config.addAllowedMethod("*");
-	    source.registerCorsConfiguration("/**", config);
-	    return new CorsFilter(source);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class);
-		
+
 		http.authorizeRequests().antMatchers(Constants.URL_BASE + "/**").permitAll();
 		if (Boolean.parseBoolean(env.getProperty("auth.basic", "true"))) {
-			http.httpBasic();
+			http.httpBasic().and().rememberMe().alwaysRemember(true).tokenValiditySeconds(60 * 60 * 24).key("web3pass");
 		}
 		if (Boolean.parseBoolean(env.getProperty("auth.form", "true"))) {
 			FormLoginConfigurer<HttpSecurity> flc = http.formLogin();
@@ -63,25 +67,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				flc.loginPage(env.getProperty("auth.form.login.page")).permitAll().loginProcessingUrl("/login");
 			}
 			flc.defaultSuccessUrl(env.getProperty("auth.form.login.success", "/")).permitAll().and().logout()
-					.permitAll().logoutSuccessUrl(env.getProperty("logout.success.url", "/login?logout")).and().rememberMe().tokenValiditySeconds(60 * 60 * 24).key("web3pass");
+					.permitAll().logoutSuccessUrl(env.getProperty("logout.success.url", "/login?logout")).and()
+					.rememberMe().alwaysRemember(true).tokenValiditySeconds(60 * 60 * 24).key("web3pass");
 		}
 
 		if (Boolean.parseBoolean(env.getProperty("ensure.https", "false")))
 			http.requiresChannel().antMatchers("/**").requiresSecure();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
-		
+
 	}
-	
-	
 
 	@Autowired
 	private UserDetailService userDetailsService;
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
 		if (Boolean.parseBoolean(env.getProperty("in.memory.users", "true"))) {
-			auth.inMemoryAuthentication().withUser("user").password("password").roles("USER", "ADMIN").and().withUser("admin")
-					.password("password").roles("USER", "ADMIN");
+			auth.inMemoryAuthentication().withUser("user").password("password").roles("USER", "ADMIN").and()
+					.withUser("admin").password("password").roles("USER", "ADMIN");
 		} else {
 			auth.userDetailsService(userDetailsService);
 		}

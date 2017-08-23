@@ -9,7 +9,11 @@ import ar.com.magm.ti.app.config.ContextConfig;
 import ar.com.magm.ti.app.config.PersistenceConfig;
 import ar.com.magm.ti.app.setup.MyApplicationContextInitializer;
 
-
+/**
+ * 
+ * @author magm
+ *
+ */
 @SpringBootApplication
 @Import({ 
     ContextConfig.class,
@@ -25,7 +29,7 @@ public class Application extends SpringBootServletInitializer {
     
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(Application.class).initializers(new MyApplicationContextInitializer()).run(args);;
+        new SpringApplicationBuilder(Application.class).initializers(new MyApplicationContextInitializer()).run(args);
     }
     
 }

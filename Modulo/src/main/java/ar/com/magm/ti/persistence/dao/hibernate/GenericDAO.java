@@ -21,6 +21,13 @@ import ar.com.magm.ti.persistence.dao.IGenericDAO;
 import ar.com.magm.ti.persistence.exception.PersistenceException;
 import javassist.NotFoundException;
 
+/**
+ * 
+ * @author magm
+ *
+ * @param <Entity>
+ * @param <PK>
+ */
 public class GenericDAO<Entity, PK extends Serializable> implements IGenericDAO<Entity, PK> {
 
 	private static Logger LOG = LoggerFactory.getLogger(GenericDAO.class);

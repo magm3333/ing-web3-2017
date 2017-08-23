@@ -7,7 +7,13 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 import ar.com.magm.ti.persistence.exception.PersistenceException;
 import javassist.NotFoundException;
-
+/**
+ * 
+ * @author magm
+ *
+ * @param <Entity>
+ * @param <PK>
+ */
 public interface IGenericDAO<Entity, PK extends Serializable> {
 
 	public Entity load(PK id) throws PersistenceException, NotFoundException;            // /product/35  GET

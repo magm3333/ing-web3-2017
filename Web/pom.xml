@@ -3,10 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ar.com.magm.ti.web</groupId>
 	<artifactId>Web</artifactId>
-
 	<packaging>war</packaging>
 	<name>Web</name>
-
 	<properties>
 		<app.main.class>ar.com.magm.ti.app.Application</app.main.class>
 	</properties>
@@ -23,7 +21,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		
-
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -39,7 +36,6 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		
 	</dependencies>
 	<build>
 		<plugins>
@@ -47,7 +43,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-
 			</plugin>
 			-->
 			 <plugin>
@@ -61,9 +56,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 		</plugins>
 	</build>
-
-
 </project>

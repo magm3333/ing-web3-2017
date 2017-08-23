@@ -5,19 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import ar.com.magm.ti.model.dao.IPlantaDAO;
-import ar.com.magm.ti.model.dao.hibernate.PlantaDAO;
-import ar.com.magm.ti.model.service.IPlantaService;
-import ar.com.magm.ti.model.service.impl.PlantaService;
-
+import ar.com.magm.ti.model.dao.IEntidadDAO;
+import ar.com.magm.ti.model.dao.hibernate.EntidadDAO;
+import ar.com.magm.ti.model.service.IEntidadService;
+import ar.com.magm.ti.model.service.impl.EntidadService;
+/**
+ * 
+ * @author magm
+ *
+ */
 @Component
 public class Beans {
 
 	//DAO
 	@Bean
 	@Autowired
-	public IPlantaDAO plantaDAO(final SessionFactory sessionFactory) {
-		return new PlantaDAO(sessionFactory);
+	public IEntidadDAO entidadDAO(final SessionFactory sessionFactory) {
+		return new EntidadDAO(sessionFactory);
 	}
 	
 	//Services
@@ -25,8 +29,8 @@ public class Beans {
 	
 	@Bean
 	@Autowired
-	public IPlantaService plantaService(final IPlantaDAO plantaDAO) {
-		return new PlantaService(plantaDAO);
+	public IEntidadService entidadService(final IEntidadDAO entidadDAO) {
+		return new EntidadService(entidadDAO);
 	}
 
 	

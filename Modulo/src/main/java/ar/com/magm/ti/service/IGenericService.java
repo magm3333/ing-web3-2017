@@ -6,6 +6,13 @@ import java.util.List;
 import ar.com.magm.ti.service.exception.ServiceException;
 import javassist.NotFoundException;
 
+/**
+ * 
+ * @author magm
+ *
+ * @param <Entity>
+ * @param <PK>
+ */
 public interface IGenericService<Entity, PK extends Serializable> {
 
 	public void delete(Entity entity) throws ServiceException, NotFoundException;

@@ -1,5 +1,10 @@
 package ar.com.magm.ti.service.exception;
 
+/**
+ * 
+ * @author magm
+ *
+ */
 public class ServiceException extends Exception {
 
 	private static final long serialVersionUID = -7169270944680916375L;

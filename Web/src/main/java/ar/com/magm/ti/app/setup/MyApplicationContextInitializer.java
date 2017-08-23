@@ -6,7 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
-
+/**
+ * 
+ * @author magm
+ *
+ */
 public class MyApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 	private static Logger LOG = LoggerFactory.getLogger(MyApplicationContextInitializer.class);
 	
