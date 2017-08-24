@@ -14,7 +14,7 @@ import org.hibernate.annotations.Proxy;
 @Entity
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
-@Table(name = "plantas")
+@Table(name = "entidades")
 public class Entidad implements Serializable {
 
 	private static final long serialVersionUID = 2464927409480955012L;
@@ -50,5 +50,10 @@ public class Entidad implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return getIdEntidad()==((Entidad)obj).getIdEntidad();
 	}
 }
