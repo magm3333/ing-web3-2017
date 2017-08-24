@@ -23,7 +23,7 @@ public class EntidadRSController {
 	private static Logger LOG = LoggerFactory.getLogger(EntidadRSController.class);
 	@Autowired
 	IEntidadService entidadService;
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<Object> list() {
 		try {
 			return new ResponseEntity<Object>(entidadService.list(), HttpStatus.OK);
