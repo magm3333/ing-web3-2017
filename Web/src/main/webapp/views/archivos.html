@@ -1,8 +1,57 @@
 <div class="container">
-<div class="panel panel-default">
-  <div class="panel-body">
-    Archivos
-  </div>
-  <div class="panel-footer">...</div>
-</div>
+	<div class="panel panel-default">
+			<div class="panel-header">
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-md-4">
+					<input class="btn btn-primary" ngf-multiple="false" type="file"
+						ngf-select="onFileSelect($file)"> 
+					{{mensajeSubida}}
+				</div>
+				
+				<div class="col-md-8">
+					<form>
+						<div class="input-group">
+							<div class="input-group-addon"
+								title="Busca en la lista actual por cualquier campo">
+								<i class="fa fa-search"></i>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="Texto a buscar (localmente)..." ng-model="search">
+						</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		<div class="panel-body">
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Tipo</th>
+						<th>Tamaño</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						dir-paginate="r in data | orderBy:'nombre' | filter:search | itemsPerPage: 10"
+						pagination-id="archivos">
+						<td>{{r.id}}</td>
+						<td><a title="Descargar" href="/ti/api/v1/archivos/{{r.id}}" target="_BLANK"><span ng-bind-html="r.nombre | highlight: search"></span></a></td>
+						<td><span ng-bind-html="r.mimeType | highlight: search"></span></td>
+						<td>{{r.size | filesize}}</td>
+						<td>
+							<span class="puntero glyphicon glyphicon-trash" ng-click="remove(r.id)"></span>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+		<div class="panel-footer"></div>
+	</div>
 </div>

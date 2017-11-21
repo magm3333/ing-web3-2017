@@ -47,7 +47,6 @@ function EntidadesController($scope, $rootScope, $uibModal, entidadesService) {
 			entidadesService.remove(id).then(function(r){
 				$scope.data.forEach(function(o,i){
 					if(o.idEntidad==id) {
-						console.log(i);
 						$scope.data.splice(i,1);
 						return false;
 					}

@@ -2,7 +2,7 @@ angular.module(
 		'ti',
 		[ 'ngRoute', 'ngSanitize', 'ui.select', 'ui.bootstrap', 'ngTagsInput',
 				'ngLoadingSpinner', 'angularUtils.directives.dirPagination',
-				'angularInlineEdit', 'adaptv.adaptStrap' ])
+				'angularInlineEdit', 'adaptv.adaptStrap', 'ngFileUpload' ])
 		.constant('URL_BASE', '/ti/').constant('URL_API_BASE', '/ti/api/v1/')
 		.factory('focus', function($timeout, $window) {
 			return function(id) {
@@ -30,6 +30,33 @@ angular.module(
 					string = string.substring(0, limit - 3) + '...';
 				return string;
 			}
+		}).filter('filesize', function () {
+			return function (size) {
+				if (isNaN(size))
+					size = 0;
+
+				if (size < 1024)
+					return size + ' Bytes';
+
+				size /= 1024;
+
+				if (size < 1024)
+					return size.toFixed(2) + ' Kb';
+
+				size /= 1024;
+
+				if (size < 1024)
+					return size.toFixed(2) + ' Mb';
+
+				size /= 1024;
+
+				if (size < 1024)
+					return size.toFixed(2) + ' Gb';
+
+				size /= 1024;
+
+				return size.toFixed(2) + ' Tb';
+			};
 		}).run(
 				[
 						'$rootScope',
