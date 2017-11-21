@@ -1,0 +1,27 @@
+{
+  "name": "caapy",
+  "version": "0.0.1-SNAPSHOT",
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "jquery": "~2.2.0",
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "font-awesome": "~4.6.0",
+    "select2": "~3.4.0",
+    "selectize": "~0.8.0",
+    "angular-ui-select":"~0.19.0",
+    "angular-bootstrap":"~2.2.0",
+    "ng-tags-input":"~3.1.0",
+    "angular-loading-spinner":"0.0.3",
+    "Hover": "~2.1.0",
+    "angular-utils-pagination": "0.11.1",
+     "allmighty-autocomplete": "*",
+     "ng-inline-edit": "~0.7.0",
+     "adapt-strap":"~2.6.1"
+     
+  } 
+}
+
+    

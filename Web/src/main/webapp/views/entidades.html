@@ -1,0 +1,67 @@
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-header">
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-md-1"></div>
+				<div class="col-md-1">
+					<button type="button" ng-click="agregar()" class="btn btn-primary">Agregar</button></div>
+				<div class="col-md-8">
+					<form>
+						<div class="input-group">
+							<div class="input-group-addon"
+								title="Busca en la lista actual por cualquier campo">
+								<i class="fa fa-search"></i>
+							</div>
+							<input type="text" class="form-control"
+								placeholder="Texto a buscar (localmente)..." ng-model="search">
+						</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		<div class="panel-body">
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nombre</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr	dir-paginate="r in data | orderBy:'nombre' | filter:search | itemsPerPage: 10"
+						pagination-id="entidades">
+						<td>{{r.idEntidad}}</td>
+						<td>
+							<span ng-hide="instancia.idEntidad==r.idEntidad" ng-bind-html="r.nombre | highlight: search"></span>
+							<input ng-hide="instancia.idEntidad!=r.idEntidad" ng-model="instancia.nombre"></input>
+							
+						<td>
+						<span ng-hide="instancia.idEntidad">
+							<span class="puntero glyphicon glyphicon-edit" ng-click="editar(r)"></span>
+							<span class="espacio10 puntero glyphicon glyphicon-trash" ng-click="remove(r.idEntidad)"></span>
+						</span>
+						
+						<span ng-hide="!instancia.idEntidad"> 
+							<span class="puntero glyphicon glyphicon-ok" ng-click="guardar(false)"></span> 
+							<span class="espacio10 puntero glyphicon glyphicon-remove" ng-click="cancelar()"></span>
+						</span>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+
+
+
+
+	</div>
+	<div class="panel-footer">
+		<dir-pagination-controls max-size="20" pagination-id="entidades"></dir-pagination-controls>
+	</div>
+</div>
+

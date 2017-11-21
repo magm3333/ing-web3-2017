@@ -1,7 +1,8 @@
 package ar.com.magm.ti.web.services;
 
 import java.io.IOException;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,9 +37,14 @@ public class ArchivoRSController extends BaseRSController {
 	private IArchivoService archivosService;
 
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
-	public ResponseEntity<Object> list() {
+	public ResponseEntity<Object> list(HttpServletRequest request) {
+
 		try {
-			return new ResponseEntity<Object>(archivosService.list(), HttpStatus.CREATED);
+			if (request.isUserInRole("ADMIN")) {
+				return new ResponseEntity<Object>(archivosService.list(), HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
+			}
 		} catch (ServiceException e) {
 			LOG.error(e.getMessage(), e);
 			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +80,7 @@ public class ArchivoRSController extends BaseRSController {
 			r = archivosService.load(id);
 			HttpHeaders responseHeaders = new HttpHeaders();
 			responseHeaders.setContentType(MediaType.parseMediaType(r.getMimeType()));
-			String filename =r.getNombre();
+			String filename = r.getNombre();
 			responseHeaders.setContentDispositionFormData(filename, filename);
 
 			return new ResponseEntity<byte[]>(r.getContenido(), responseHeaders, HttpStatus.OK);
@@ -86,6 +93,7 @@ public class ArchivoRSController extends BaseRSController {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable("id") int id) {
 		Archivo a = new Archivo();
